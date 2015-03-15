@@ -53,6 +53,9 @@ docs/_build/
 # PyBuilder
 target/
 
+# Private configuration stuff
+*.config
+
 # =========================
 # Operating System Files
 # =========================

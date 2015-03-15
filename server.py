@@ -1,7 +1,9 @@
 # basic server for the sandbox
 
 from bottle import Bottle, run
-import FreemontBridgeCount as FBC
+
+# import sandbox modules
+import FremontBridgeCount as FBC
 
 
 def hello():
@@ -9,9 +11,13 @@ def hello():
 
 def setup_routing(app):
     app.route('/hello', 'GET', hello)
-    app.route('/freemontBridge', 'GET', FBC.getFreemontBridgeData)
+
+    # sandbox module routes
+    app.route('/fremontBridge', 'GET', FBC.getFremontBridge)
 
 
+# setup and run the app
 myapp = Bottle()
+myapp.config.load_config('bottleapp.config')
 setup_routing(myapp)
 run(myapp, host='localhost', port=8080)
