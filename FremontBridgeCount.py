@@ -52,7 +52,7 @@ def plotFremontBridgeData(SODA):
     nb = []
     sb = []
     for e in SODA:
-        dates.append(e['date'])
+        dates.append(e['date'].replace('T', ' '))
         nb.append(int(e['fremont_bridge_nb']))
         sb.append(int(e['fremont_bridge_sb']))
 
@@ -62,18 +62,20 @@ def plotFremontBridgeData(SODA):
     trace1 = gobs.Scatter(
         x=dates,
         y=sb,
+        mode='lines+markers',
         name='South-bound'
     )
     trace2 = gobs.Scatter(
         x=dates,
         y=nb,
+        mode='lines+markers',
         name='North-bound'
     )
 
     data = gobs.Data([trace1, trace2])
     layout = gobs.Layout(
         title = 'Fremont Bridge Bike Traffic',
-        xaxis1 = gobs.XAxis(title='hour', showgrid=False),
+        xaxis1 = gobs.XAxis(title='time', showgrid=False),
         yaxis1 = gobs.YAxis(title='bicycles')
     )
     fig = gobs.Figure(data=data, layout=layout)
@@ -88,8 +90,10 @@ def getFremontBridge():
     ploturl = plotFremontBridgeData(soda)
     w = 640
     h = 480
+    r = requests.get(ploturl+'.html')
+    plothtml = r.text
+
 
     return template('basetemplate',
-                    ploturl=str(ploturl+'.embed?width='+str(w)+'&height='+str(h)),
-                    w = str(w+40),
-                    h = str(h+40))
+                    plothtml=plothtml
+                    )
