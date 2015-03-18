@@ -30,6 +30,11 @@
       Select new data ranges (TODO), then click -->
       <button class="btn btn-primary" type="submit">Submit</button>
     </form>
+
+    <p> Animation 1: Northbound traffic over 10s, continuously</p>
+
+    {{ !animatehtml }}
+
   </div> <!-- /container -->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
